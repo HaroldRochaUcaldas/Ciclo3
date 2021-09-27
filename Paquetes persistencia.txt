@@ -1,0 +1,6 @@
+dotnet add package  Microsoft.EntityFrameworkCore --version 5.0.0
+dotnet add package  Microsoft.EntityFrameworkCore.Tools --version 5.0.0
+dotnet add package  Microsoft.EntityFrameworkCore.Design --version 5.0.0
+dotnet add package  Microsoft.EntityFrameworkCore.SqlServer --version 5.0.0
+consola tambien 
+dotnet add package  Microsoft.EntityFrameworkCore.Design --version 5.0.0

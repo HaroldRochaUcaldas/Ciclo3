@@ -1,0 +1,2 @@
+dotnet ef migrations add Initial --startup-project ..\HospiEnCasa.App.Consola\
+dotnet ef database update --startup-project ..\HospiEnCasa.App.Consola\
