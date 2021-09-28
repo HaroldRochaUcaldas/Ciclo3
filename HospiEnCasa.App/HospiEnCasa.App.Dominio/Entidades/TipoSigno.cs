@@ -3,22 +3,22 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace HospiEnCasa.App.Dominio
 {
-    public enum GeneroEnum
+    public enum TipoSignoEnum
     {
         masculino,
         femenino,
     }
 
-    public class Genero
+    public class TipoSigno
     {
-        private Genero(GeneroEnum @enum)
+        private TipoSigno(TipoSignoEnum @enum)
         {
             Id = (int)@enum;
             Name = @enum.ToString();
             Description = "";
         }
 
-        public Genero() { } //For EF
+        public TipoSigno() { } //For EF
 
         [Key]
         public int Id { get; set; }
@@ -29,9 +29,9 @@ namespace HospiEnCasa.App.Dominio
         [MaxLength(100)]
         public string Description { get; set; }
 
-        public static implicit operator Genero(GeneroEnum @enum) => new Genero(@enum);
+        public static implicit operator TipoSigno(TipoSignoEnum @enum) => new TipoSigno(@enum);
 
-        public static implicit operator GeneroEnum(Genero genero) => (GeneroEnum)genero.Id;
+        public static implicit operator TipoSignoEnum(TipoSigno tiposigno) => (TipoSignoEnum)tiposigno.Id;
     }
 
 }

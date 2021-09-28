@@ -7,7 +7,14 @@ namespace HospiEnCasa.App.Persistencia
     {
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Genero> Generos { get; set; }
+        public DbSet<SignoVital> SignoVitales { get; set; }
+        public DbSet<TipoSigno> TipoSignos { get; set; }
+        public DbSet<Historia> Historias { get; set; }
+        public DbSet<SugerenciaCuidado> SugerenciaCuidados { get; set; }
         public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Enfermera> Enfermeras { get; set; }
+        public DbSet<FamiliarDesignado> FamiliarDesignados { get; set; }
         public DbContextOptionsBuilder OptionBuilder { get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
