@@ -4,14 +4,16 @@ using HospiEnCasa.App.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20210928014732_allentidades3")]
+    partial class allentidades3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,12 +227,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasBaseType("HospiEnCasa.App.Dominio.Persona");
 
-                    b.Property<int?>("HistoriaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SignoVitalId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ciudad")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -244,21 +240,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.Property<DateTime>("fecha")
                         .HasColumnType("DATETIME");
 
-                    b.Property<int>("historias_id")
-                        .HasColumnType("int");
-
                     b.Property<double>("latitud")
                         .HasColumnType("FLOAT");
 
                     b.Property<double>("longitud")
                         .HasColumnType("FLOAT");
-
-                    b.Property<int>("signovital_id")
-                        .HasColumnType("int");
-
-                    b.HasIndex("HistoriaId");
-
-                    b.HasIndex("SignoVitalId");
 
                     b.ToTable("Pacientes");
                 });
@@ -323,23 +309,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Historia", "Historia")
-                        .WithMany()
-                        .HasForeignKey("HistoriaId");
-
                     b.HasOne("HospiEnCasa.App.Dominio.Persona", null)
                         .WithOne()
                         .HasForeignKey("HospiEnCasa.App.Dominio.Paciente", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.HasOne("HospiEnCasa.App.Dominio.SignoVital", "SignoVital")
-                        .WithMany()
-                        .HasForeignKey("SignoVitalId");
-
-                    b.Navigation("Historia");
-
-                    b.Navigation("SignoVital");
                 });
 #pragma warning restore 612, 618
         }

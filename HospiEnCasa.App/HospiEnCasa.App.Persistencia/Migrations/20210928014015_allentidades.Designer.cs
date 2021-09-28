@@ -4,14 +4,16 @@ using HospiEnCasa.App.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20210928014015_allentidades")]
+    partial class allentidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,33 +40,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Generos");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.Historia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("SugerenciaCuidado_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("diagnostico")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("VARCHAR(500)");
-
-                    b.Property<string>("entorno")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("VARCHAR(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SugerenciaCuidado_id");
-
-                    b.ToTable("Historias");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Persona", b =>
@@ -97,74 +72,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.HasIndex("genero_id");
 
                     b.ToTable("Personas");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.SignoVital", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("fecha")
-                        .HasMaxLength(100)
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("signoId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("valor")
-                        .HasMaxLength(100)
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("signoId");
-
-                    b.ToTable("SignoVitales");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.SugerenciaCuidado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("VARCHAR(500)");
-
-                    b.Property<string>("fechaHora")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("VARCHAR(500)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("sugerenciaCuidados");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.TipoSigno", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoSignos");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Enfermera", b =>
@@ -225,12 +132,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasBaseType("HospiEnCasa.App.Dominio.Persona");
 
-                    b.Property<int?>("HistoriaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SignoVitalId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ciudad")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -244,34 +145,13 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.Property<DateTime>("fecha")
                         .HasColumnType("DATETIME");
 
-                    b.Property<int>("historias_id")
-                        .HasColumnType("int");
-
                     b.Property<double>("latitud")
                         .HasColumnType("FLOAT");
 
                     b.Property<double>("longitud")
                         .HasColumnType("FLOAT");
 
-                    b.Property<int>("signovital_id")
-                        .HasColumnType("int");
-
-                    b.HasIndex("HistoriaId");
-
-                    b.HasIndex("SignoVitalId");
-
                     b.ToTable("Pacientes");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.Historia", b =>
-                {
-                    b.HasOne("HospiEnCasa.App.Dominio.SugerenciaCuidado", "SugerenciaCuidados")
-                        .WithMany()
-                        .HasForeignKey("SugerenciaCuidado_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SugerenciaCuidados");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Persona", b =>
@@ -283,15 +163,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .IsRequired();
 
                     b.Navigation("Generos");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.SignoVital", b =>
-                {
-                    b.HasOne("HospiEnCasa.App.Dominio.TipoSigno", "signo")
-                        .WithMany()
-                        .HasForeignKey("signoId");
-
-                    b.Navigation("signo");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Enfermera", b =>
@@ -323,23 +194,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Historia", "Historia")
-                        .WithMany()
-                        .HasForeignKey("HistoriaId");
-
                     b.HasOne("HospiEnCasa.App.Dominio.Persona", null)
                         .WithOne()
                         .HasForeignKey("HospiEnCasa.App.Dominio.Paciente", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.HasOne("HospiEnCasa.App.Dominio.SignoVital", "SignoVital")
-                        .WithMany()
-                        .HasForeignKey("SignoVitalId");
-
-                    b.Navigation("Historia");
-
-                    b.Navigation("SignoVital");
                 });
 #pragma warning restore 612, 618
         }

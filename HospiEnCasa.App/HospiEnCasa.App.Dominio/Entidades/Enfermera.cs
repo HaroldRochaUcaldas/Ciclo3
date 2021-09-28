@@ -3,15 +3,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace HospiEnCasa.App.Dominio
 {
-    public class FamiliarDesignado : Persona
+    public class Enfermera : Persona
     {
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(100)]
-        public string parentesco { get; set; }
+        public string tarjeta_profesional { get; set; }
         [Required]
-        [Column(TypeName = "VARCHAR")]
-        [StringLength(100)]
-        public int correo{ get; set; }
+        [Column(TypeName ="INTEGER")]
+        public int horas_laborales { get; set; }
     }
 }

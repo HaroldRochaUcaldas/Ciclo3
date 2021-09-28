@@ -7,8 +7,12 @@ namespace HospiEnCasa.App.Persistencia
     {
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Genero> Generos { get; set; }
-//        public DbSet<Medico> Medicos { get; set; }
-        public DbContextOptionsBuilder OptionBuilder { get; set;}
+        public DbSet<TipoSigno> TipoSignos{ get; set; }
+        public DbSet<SignoVital> SignoVitales { get; set; }
+        public DbSet<SugerenciaCuidado> sugerenciaCuidados { get; set; }
+        public DbSet<Historia> Historias { get; set; }
+        //public DbSet<Medico> Medicos { get; set; }
+        public DbContextOptionsBuilder OptionBuilder {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
@@ -23,6 +27,9 @@ namespace HospiEnCasa.App.Persistencia
        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
           modelBuilder.Entity<Medico>().ToTable("Medicos");
+          modelBuilder.Entity<Enfermera>().ToTable("Enfermeras");
+          modelBuilder.Entity<FamiliarDesignado>().ToTable("FamiliaresDesignados");
+          modelBuilder.Entity<Paciente>().ToTable("Pacientes");
       //    modelBuilder.Entity<Medico>().Property(e => e.Id).ValueGeneratedNever();
         }
 

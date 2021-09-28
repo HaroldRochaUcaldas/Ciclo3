@@ -4,14 +4,16 @@ using HospiEnCasa.App.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20210928014526_allentidades2")]
+    partial class allentidades2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +49,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("SugerenciaCuidado_id")
-                        .HasColumnType("int");
-
                     b.Property<string>("diagnostico")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -61,8 +60,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasColumnType("VARCHAR(500)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SugerenciaCuidado_id");
 
                     b.ToTable("Historias");
                 });
@@ -225,12 +222,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasBaseType("HospiEnCasa.App.Dominio.Persona");
 
-                    b.Property<int?>("HistoriaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SignoVitalId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ciudad")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -244,34 +235,13 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.Property<DateTime>("fecha")
                         .HasColumnType("DATETIME");
 
-                    b.Property<int>("historias_id")
-                        .HasColumnType("int");
-
                     b.Property<double>("latitud")
                         .HasColumnType("FLOAT");
 
                     b.Property<double>("longitud")
                         .HasColumnType("FLOAT");
 
-                    b.Property<int>("signovital_id")
-                        .HasColumnType("int");
-
-                    b.HasIndex("HistoriaId");
-
-                    b.HasIndex("SignoVitalId");
-
                     b.ToTable("Pacientes");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.Historia", b =>
-                {
-                    b.HasOne("HospiEnCasa.App.Dominio.SugerenciaCuidado", "SugerenciaCuidados")
-                        .WithMany()
-                        .HasForeignKey("SugerenciaCuidado_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SugerenciaCuidados");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Persona", b =>
@@ -323,23 +293,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Historia", "Historia")
-                        .WithMany()
-                        .HasForeignKey("HistoriaId");
-
                     b.HasOne("HospiEnCasa.App.Dominio.Persona", null)
                         .WithOne()
                         .HasForeignKey("HospiEnCasa.App.Dominio.Paciente", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.HasOne("HospiEnCasa.App.Dominio.SignoVital", "SignoVital")
-                        .WithMany()
-                        .HasForeignKey("SignoVitalId");
-
-                    b.Navigation("Historia");
-
-                    b.Navigation("SignoVital");
                 });
 #pragma warning restore 612, 618
         }
