@@ -46,6 +46,10 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("apellidos")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -69,6 +73,8 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.HasIndex("genero_id");
 
                     b.ToTable("Personas");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Persona");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Medico", b =>
@@ -90,7 +96,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR(500)");
 
-                    b.ToTable("Medicos");
+                    b.HasDiscriminator().HasValue("Medico");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Persona", b =>
@@ -102,15 +108,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .IsRequired();
 
                     b.Navigation("Generos");
-                });
-
-            modelBuilder.Entity("HospiEnCasa.App.Dominio.Medico", b =>
-                {
-                    b.HasOne("HospiEnCasa.App.Dominio.Persona", null)
-                        .WithOne()
-                        .HasForeignKey("HospiEnCasa.App.Dominio.Medico", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

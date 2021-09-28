@@ -29,7 +29,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     nombre = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     apellidos = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     numeroTelefeno = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
-                    genero_id = table.Column<int>(type: "int", nullable: false)
+                    genero_id = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Especialidad = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: true),
+                    codigo = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: true),
+                    registro_rethus = table.Column<string>(type: "VARCHAR(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,26 +46,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Medicos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Especialidad = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
-                    codigo = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
-                    registro_rethus = table.Column<string>(type: "VARCHAR(500)", maxLength: 500, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Medicos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Medicos_Personas_Id",
-                        column: x => x.Id,
-                        principalTable: "Personas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Personas_genero_id",
                 table: "Personas",
@@ -70,9 +54,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Medicos");
-
             migrationBuilder.DropTable(
                 name: "Personas");
 
