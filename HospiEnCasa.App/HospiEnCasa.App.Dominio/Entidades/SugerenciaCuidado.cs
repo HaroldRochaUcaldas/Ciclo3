@@ -15,7 +15,7 @@ namespace HospiEnCasa.App.Dominio
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(500)]
-        public String descripcion { get; set; }
+        public String descripcion { get; set;}
     }
 
 }

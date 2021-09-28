@@ -21,14 +21,7 @@ namespace HospiEnCasa.App.Dominio
         public string ciudad { get; set; }
         [Required]
         [Column(TypeName = "DATETIME")]
-        public DateTime fecha { get; set; }
+        public DateTime fechaNacimiento { get; set; }
         
-        [ForeignKey("SignoVitales")]
-        public int signovital_id { get; set; }
-        public SignoVital SignoVital { get; set; }
-       
-        [ForeignKey("Historias")]
-        public int historias_id { get; set; }
-        public Historia Historia { get; set; }
     }
 }

@@ -17,9 +17,11 @@ namespace HospiEnCasa.App.Dominio
         [Column(TypeName = "VARCHAR")]
         [StringLength(500)]
         public String entorno { get; set; }
-        [ForeignKey("SugerenciaCuidados")]
-        public int SugerenciaCuidado_id { get; set; }
-        public SugerenciaCuidado SugerenciaCuidados { get; set; }
+        [ForeignKey("sugerenciacuidado_id")]
+        public SugerenciaCuidado sugerenciaCuidados_ { get; set; }
+
+        [ForeignKey("paciente_id")]
+        public Paciente paciente_ { get; set; }
     }
 
 }

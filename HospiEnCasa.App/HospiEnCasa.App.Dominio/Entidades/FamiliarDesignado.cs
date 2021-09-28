@@ -13,5 +13,7 @@ namespace HospiEnCasa.App.Dominio
         [Column(TypeName = "VARCHAR")]
         [StringLength(100)]
         public int correo{ get; set; }
+        [ForeignKey("paciente_id")]
+        public Paciente paciente { get; set; }
     }
 }

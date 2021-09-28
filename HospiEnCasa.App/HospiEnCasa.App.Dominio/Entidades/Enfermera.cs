@@ -12,5 +12,8 @@ namespace HospiEnCasa.App.Dominio
         [Required]
         [Column(TypeName ="INTEGER")]
         public int horas_laborales { get; set; }
+
+        [ForeignKey("paciente_id")]
+        public Paciente paciente { get; set; }
     }
 }

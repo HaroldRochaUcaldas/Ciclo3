@@ -21,8 +21,7 @@ namespace HospiEnCasa.App.Dominio
         [Column(TypeName ="VARCHAR")]
         [StringLength(500)]
         public string registro_rethus { get; set; }
-/*        [ForeignKey("Personas")]
-        public int Persona_id { get; set; }
-        public Persona personas { get; set; }*/
+        [ForeignKey("paciente_id")]
+        public Paciente paciente_ { get; set; }
     }
 }
