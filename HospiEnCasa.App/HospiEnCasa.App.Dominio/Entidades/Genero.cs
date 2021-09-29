@@ -1,21 +1,34 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 namespace HospiEnCasa.App.Dominio
 {
+
+    public static class EnumExtensionMethods  
+    {  
+        public static string GetEnumDescription(this Enum enumValue)  
+        {  
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());  
+  
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);  
+  
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();  
+        }  
+    } 
     public enum GeneroEnum
     {
+        [Description("Genero con el cual se registro el paciente el cual es masculino")]
         masculino,
+        [Description("Genero con el cual se registro el paciente el cual es masculino")]
         femenino,
     }
-
     public class Genero
     {
-        private Genero(GeneroEnum @enum)
+        public Genero(GeneroEnum @enum)
         {
             Id = (int)@enum;
             Name = @enum.ToString();
-            Description = "";
+            Description = @enum.GetEnumDescription(); 
         }
 
         public Genero() { } //For EF

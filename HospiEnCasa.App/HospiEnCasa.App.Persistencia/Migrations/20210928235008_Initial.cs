@@ -55,7 +55,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
+                    nombres = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     apellidos = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     numeroTelefeno = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
                     generos_id = table.Column<int>(type: "int", nullable: true)

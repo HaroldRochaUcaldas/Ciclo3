@@ -11,7 +11,7 @@ namespace HospiEnCasa.App.Dominio
         [Required]
         [Column(TypeName ="VARCHAR")]
         [StringLength(250)]
-        public String nombre { get; set; }
+        public String nombres { get; set; }
         [Required]
         [Column(TypeName ="VARCHAR")]
         [StringLength(250)]

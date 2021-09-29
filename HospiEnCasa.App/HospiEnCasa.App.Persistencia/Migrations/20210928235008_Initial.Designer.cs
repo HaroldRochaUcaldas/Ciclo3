@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20210928215859_Initial")]
+    [Migration("20210928235008_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,7 +89,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.Property<int?>("generos_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("nombres")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");

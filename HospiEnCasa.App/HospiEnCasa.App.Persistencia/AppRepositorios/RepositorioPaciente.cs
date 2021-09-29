@@ -58,7 +58,7 @@ namespace HospiEnCasa.App.Persistencia
             var pacienteEncontrado = _appContex.Pacientes.FirstOrDefault(p => p.Id == paciente.Id);
             if (pacienteEncontrado == null)
             {
-                pacienteEncontrado.nombre = paciente.nombre;
+                pacienteEncontrado.nombres = paciente.nombres;
                 pacienteEncontrado.apellidos = paciente.apellidos;
                 pacienteEncontrado.numeroTelefeno = paciente.numeroTelefeno;
                 pacienteEncontrado.genero=paciente.genero;
