@@ -58,17 +58,17 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     nombres = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     apellidos = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     numeroTelefeno = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
-                    generos_id = table.Column<int>(type: "int", nullable: true)
+                    genero_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Personas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Personas_Generos_generos_id",
-                        column: x => x.generos_id,
+                        name: "FK_Personas_Generos_genero_id",
+                        column: x => x.genero_id,
                         principalTable: "Generos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -254,9 +254,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 column: "paciente_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Personas_generos_id",
+                name: "IX_Personas_genero_id",
                 table: "Personas",
-                column: "generos_id");
+                column: "genero_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SignoVitales_paciente_id",

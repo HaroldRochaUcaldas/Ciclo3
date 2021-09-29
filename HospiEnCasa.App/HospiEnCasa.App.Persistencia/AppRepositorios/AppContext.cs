@@ -7,6 +7,9 @@ namespace HospiEnCasa.App.Persistencia
     {
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<FamiliarDesignado> FamiliarDesignados { get; set; }
+        public DbSet<Enfermera> Enfermeras { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
         public DbSet<Genero> Generos { get; set; }
         public DbSet<TipoSigno> TipoSignos{ get; set; }
         public DbSet<SignoVital> SignoVitales { get; set; }

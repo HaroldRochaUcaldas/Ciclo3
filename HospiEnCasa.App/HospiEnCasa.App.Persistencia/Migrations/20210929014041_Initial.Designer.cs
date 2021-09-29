@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20210928235008_Initial")]
+    [Migration("20210929014041_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
-                    b.Property<int?>("generos_id")
+                    b.Property<int>("genero_id")
                         .HasColumnType("int");
 
                     b.Property<string>("nombres")
@@ -101,7 +101,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("generos_id");
+                    b.HasIndex("genero_id");
 
                     b.ToTable("Personas");
                 });
@@ -293,7 +293,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasOne("HospiEnCasa.App.Dominio.Genero", "genero")
                         .WithMany()
-                        .HasForeignKey("generos_id");
+                        .HasForeignKey("genero_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("genero");
                 });

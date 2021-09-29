@@ -84,7 +84,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
-                    b.Property<int?>("generos_id")
+                    b.Property<int>("genero_id")
                         .HasColumnType("int");
 
                     b.Property<string>("nombres")
@@ -99,7 +99,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("generos_id");
+                    b.HasIndex("genero_id");
 
                     b.ToTable("Personas");
                 });
@@ -291,7 +291,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasOne("HospiEnCasa.App.Dominio.Genero", "genero")
                         .WithMany()
-                        .HasForeignKey("generos_id");
+                        .HasForeignKey("genero_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("genero");
                 });

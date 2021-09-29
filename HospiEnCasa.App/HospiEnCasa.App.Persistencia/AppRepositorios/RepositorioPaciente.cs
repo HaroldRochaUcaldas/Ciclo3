@@ -61,7 +61,8 @@ namespace HospiEnCasa.App.Persistencia
                 pacienteEncontrado.nombres = paciente.nombres;
                 pacienteEncontrado.apellidos = paciente.apellidos;
                 pacienteEncontrado.numeroTelefeno = paciente.numeroTelefeno;
-                pacienteEncontrado.genero=paciente.genero;
+                pacienteEncontrado.genero_id=paciente.genero_id;
+               // pacienteEncontrado.genero=paciente.genero;
                 pacienteEncontrado.direccion=paciente.direccion;
                 pacienteEncontrado.latitud=paciente.latitud;
                 pacienteEncontrado.longitud=paciente.longitud;
