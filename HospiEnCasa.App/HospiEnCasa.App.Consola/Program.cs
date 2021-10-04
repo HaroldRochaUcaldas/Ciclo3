@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 using HospiEnCasa.App.Persistencia;
-using HospiEnCasa.App.Dominio;
+//using HospiEnCasa.App.Dominio;
 
 namespace HospiEnCasa.App.Consola
 {
@@ -12,6 +12,7 @@ namespace HospiEnCasa.App.Consola
         {
             Console.WriteLine("Inicio programa!");
             AddPaciente();
+            GetPaciente();
         }
 
         private static IRepositorioPaciente _repoPaciente=new RepositorioPaciente(new Persistencia.AppContext());
@@ -31,6 +32,15 @@ namespace HospiEnCasa.App.Consola
                 fechaNacimiento =new DateTime(1990,04,12)
             };
             _repoPaciente.AddPaciente(paciente);
+        }
+
+        private static void GetPaciente()
+        {
+           
+            Paciente paciente=_repoPaciente.GetPaciente(2);
+            Console.WriteLine(paciente.Id);
+            Console.WriteLine(paciente.genero_id);
+            Console.WriteLine(paciente.genero.Name);            
         }
     }
 }

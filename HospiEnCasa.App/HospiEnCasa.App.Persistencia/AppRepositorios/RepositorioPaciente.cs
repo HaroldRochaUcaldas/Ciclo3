@@ -45,6 +45,11 @@ namespace HospiEnCasa.App.Persistencia
 
         public Paciente GetPaciente(int idPaciente)
         {
+            Paciente pacienteretornado = _appContex.Pacientes.FirstOrDefault(p => p.Id == idPaciente);
+            if (pacienteretornado.genero == null)
+            {
+             pacienteretornado.genero=_appContex.Generos.FirstOrDefault(p => p.Id == pacienteretornado.genero_id);
+            }
             return _appContex.Pacientes.FirstOrDefault(p => p.Id == idPaciente);
         }
 
@@ -61,13 +66,13 @@ namespace HospiEnCasa.App.Persistencia
                 pacienteEncontrado.nombres = paciente.nombres;
                 pacienteEncontrado.apellidos = paciente.apellidos;
                 pacienteEncontrado.numeroTelefeno = paciente.numeroTelefeno;
-                pacienteEncontrado.genero_id=paciente.genero_id;
-               // pacienteEncontrado.genero=paciente.genero;
-                pacienteEncontrado.direccion=paciente.direccion;
-                pacienteEncontrado.latitud=paciente.latitud;
-                pacienteEncontrado.longitud=paciente.longitud;
-                pacienteEncontrado.ciudad=paciente.ciudad;
-                pacienteEncontrado.fechaNacimiento=paciente.fechaNacimiento;
+                pacienteEncontrado.genero_id = paciente.genero_id;
+                // pacienteEncontrado.genero=paciente.genero;
+                pacienteEncontrado.direccion = paciente.direccion;
+                pacienteEncontrado.latitud = paciente.latitud;
+                pacienteEncontrado.longitud = paciente.longitud;
+                pacienteEncontrado.ciudad = paciente.ciudad;
+                pacienteEncontrado.fechaNacimiento = paciente.fechaNacimiento;
                 _appContex.SaveChanges();
                 return pacienteEncontrado;
             }
