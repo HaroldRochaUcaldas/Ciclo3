@@ -21,15 +21,19 @@ namespace HospiEnCasa.App.Persistencia
         {
             if (!optionBuilder.IsConfigured)
             {
-                optionBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = HospiEnCasaData2");
+                optionBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = HospiEnCasaData3");
             }
         
         
         }
 
-      /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+     /*  protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          modelBuilder.Entity<Medico>().ToTable("Medicos");
+          modelBuilder.Entity<Persona>().HasKey(k => new { k.enfermera_id});
+          modelBuilder.Entity<Persona>().HasKey(k => new { k.Medico_id});
+          modelBuilder.Entity<Persona>().HasKey(k => new { k.historia_id});
+          modelBuilder.Entity<Persona>().HasKey(k => new { k.familiarDesignado_id});
+          modelBuilder.Entity<Persona>().ToTable("Personas");
       //    modelBuilder.Entity<Medico>().Property(e => e.Id).ValueGeneratedNever();
         }*/
 

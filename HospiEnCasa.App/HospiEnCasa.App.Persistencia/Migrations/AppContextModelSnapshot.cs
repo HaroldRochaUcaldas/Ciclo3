@@ -78,12 +78,24 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Medico_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("apellidos")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
+                    b.Property<int>("enfermera_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("familiarDesignado_id")
+                        .HasColumnType("int");
+
                     b.Property<int>("genero_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("historia_id")
                         .HasColumnType("int");
 
                     b.Property<string>("nombres")

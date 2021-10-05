@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20210928022156_Initial")]
-    partial class Initial
+    [Migration("20211005014403_tablaPersonaManual")]
+    partial class tablaPersonaManual
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,15 +80,27 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Medico_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("apellidos")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
 
+                    b.Property<int>("enfermera_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("familiarDesignado_id")
+                        .HasColumnType("int");
+
                     b.Property<int>("genero_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<int>("historia_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nombres")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("VARCHAR(250)");
@@ -233,12 +245,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasBaseType("HospiEnCasa.App.Dominio.Persona");
 
-                    b.Property<int?>("HistoriaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SignoVitalId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ciudad")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -249,10 +255,16 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("VARCHAR(100)");
 
-                    b.Property<DateTime>("fecha")
+                    b.Property<int?>("enfermeraId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("familiarDesignadoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("fechaNacimiento")
                         .HasColumnType("DATETIME");
 
-                    b.Property<int>("historias_id")
+                    b.Property<int?>("historiaId")
                         .HasColumnType("int");
 
                     b.Property<double>("latitud")
@@ -261,12 +273,16 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.Property<double>("longitud")
                         .HasColumnType("FLOAT");
 
-                    b.Property<int>("signovital_id")
+                    b.Property<int?>("medicoId")
                         .HasColumnType("int");
 
-                    b.HasIndex("HistoriaId");
+                    b.HasIndex("enfermeraId");
 
-                    b.HasIndex("SignoVitalId");
+                    b.HasIndex("familiarDesignadoId");
+
+                    b.HasIndex("historiaId");
+
+                    b.HasIndex("medicoId");
 
                     b.HasDiscriminator().HasValue("Paciente");
                 });
@@ -284,13 +300,13 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Persona", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Genero", "Generos")
+                    b.HasOne("HospiEnCasa.App.Dominio.Genero", "genero")
                         .WithMany()
                         .HasForeignKey("genero_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Generos");
+                    b.Navigation("genero");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.SignoVital", b =>
@@ -304,17 +320,29 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Historia", "Historia")
+                    b.HasOne("HospiEnCasa.App.Dominio.Enfermera", "enfermera")
                         .WithMany()
-                        .HasForeignKey("HistoriaId");
+                        .HasForeignKey("enfermeraId");
 
-                    b.HasOne("HospiEnCasa.App.Dominio.SignoVital", "SignoVital")
+                    b.HasOne("HospiEnCasa.App.Dominio.FamiliarDesignado", "familiarDesignado")
                         .WithMany()
-                        .HasForeignKey("SignoVitalId");
+                        .HasForeignKey("familiarDesignadoId");
 
-                    b.Navigation("Historia");
+                    b.HasOne("HospiEnCasa.App.Dominio.Historia", "historia")
+                        .WithMany()
+                        .HasForeignKey("historiaId");
 
-                    b.Navigation("SignoVital");
+                    b.HasOne("HospiEnCasa.App.Dominio.Medico", "medico")
+                        .WithMany()
+                        .HasForeignKey("medicoId");
+
+                    b.Navigation("enfermera");
+
+                    b.Navigation("familiarDesignado");
+
+                    b.Navigation("historia");
+
+                    b.Navigation("medico");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
-    public partial class Initial : Migration
+    public partial class tablaPersonaManual : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,10 +97,14 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
+                    nombres = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     apellidos = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     numeroTelefeno = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
                     genero_id = table.Column<int>(type: "int", nullable: false),
+                    Medico_id = table.Column<int>(type: "int", nullable: false),
+                    familiarDesignado_id = table.Column<int>(type: "int", nullable: false),
+                    enfermera_id = table.Column<int>(type: "int", nullable: false),
+                    historia_id = table.Column<int>(type: "int", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     tarjeta_profesional = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: true),
                     horas_laborales = table.Column<int>(type: "INTEGER", nullable: true),
@@ -113,11 +117,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     latitud = table.Column<double>(type: "FLOAT", nullable: true),
                     longitud = table.Column<double>(type: "FLOAT", nullable: true),
                     ciudad = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: true),
-                    fecha = table.Column<DateTime>(type: "DATETIME", nullable: true),
-                    signovital_id = table.Column<int>(type: "int", nullable: true),
-                    SignoVitalId = table.Column<int>(type: "int", nullable: true),
-                    historias_id = table.Column<int>(type: "int", nullable: true),
-                    HistoriaId = table.Column<int>(type: "int", nullable: true)
+                    fechaNacimiento = table.Column<DateTime>(type: "DATETIME", nullable: true),
+                    medicoId = table.Column<int>(type: "int", nullable: true),
+                    familiarDesignadoId = table.Column<int>(type: "int", nullable: true),
+                    enfermeraId = table.Column<int>(type: "int", nullable: true),
+                    historiaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -129,15 +133,27 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Personas_Historias_HistoriaId",
-                        column: x => x.HistoriaId,
+                        name: "FK_Personas_Historias_historiaId",
+                        column: x => x.historiaId,
                         principalTable: "Historias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Personas_SignoVitales_SignoVitalId",
-                        column: x => x.SignoVitalId,
-                        principalTable: "SignoVitales",
+                        name: "FK_Personas_Personas_enfermeraId",
+                        column: x => x.enfermeraId,
+                        principalTable: "Personas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Personas_Personas_familiarDesignadoId",
+                        column: x => x.familiarDesignadoId,
+                        principalTable: "Personas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Personas_Personas_medicoId",
+                        column: x => x.medicoId,
+                        principalTable: "Personas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -148,19 +164,29 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 column: "SugerenciaCuidado_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Personas_enfermeraId",
+                table: "Personas",
+                column: "enfermeraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Personas_familiarDesignadoId",
+                table: "Personas",
+                column: "familiarDesignadoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Personas_genero_id",
                 table: "Personas",
                 column: "genero_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Personas_HistoriaId",
+                name: "IX_Personas_historiaId",
                 table: "Personas",
-                column: "HistoriaId");
+                column: "historiaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Personas_SignoVitalId",
+                name: "IX_Personas_medicoId",
                 table: "Personas",
-                column: "SignoVitalId");
+                column: "medicoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SignoVitales_signoId",
@@ -174,19 +200,19 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 name: "Personas");
 
             migrationBuilder.DropTable(
+                name: "SignoVitales");
+
+            migrationBuilder.DropTable(
                 name: "Generos");
 
             migrationBuilder.DropTable(
                 name: "Historias");
 
             migrationBuilder.DropTable(
-                name: "SignoVitales");
+                name: "TipoSignos");
 
             migrationBuilder.DropTable(
                 name: "SugerenciaCuidados");
-
-            migrationBuilder.DropTable(
-                name: "TipoSignos");
         }
     }
 }

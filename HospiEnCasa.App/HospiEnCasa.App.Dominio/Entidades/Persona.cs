@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace HospiEnCasa.App.Dominio
 {
-    public abstract class Persona
+    public class Persona
     {
         [Key]
         public int Id { get; set; }
@@ -25,5 +25,16 @@ namespace HospiEnCasa.App.Dominio
         [ForeignKey("genero")]
         public int genero_id;
         public Genero genero { get; set; }
+
+        [ForeignKey("Medico")]
+        public int Medico_id { get; set; }
+
+        [ForeignKey("FamiliarDesignado")]
+        public int familiarDesignado_id { get; set; }
+
+        [ForeignKey("Enfermera")]
+        public int enfermera_id { get; set; }
+        [ForeignKey("Historia")]
+        public int historia_id { get; set; }
     }
 }
