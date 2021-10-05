@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace HospiEnCasa.App.Dominio
 {
-    public abstract class Persona
+    public class Persona
     {
         [Key]
         public int Id { get; set; }

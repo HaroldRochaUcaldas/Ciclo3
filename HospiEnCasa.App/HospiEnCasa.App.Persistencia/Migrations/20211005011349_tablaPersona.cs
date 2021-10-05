@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
-    public partial class Initial : Migration
+    public partial class tablaPersona : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -126,8 +126,8 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 name: "Pacientes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    historia_id = table.Column<int>(type: "int", nullable: false),
+                    historia_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     direccion = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
                     latitud = table.Column<double>(type: "FLOAT", nullable: false),
                     longitud = table.Column<double>(type: "FLOAT", nullable: false),
@@ -136,6 +136,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     medico_id = table.Column<int>(type: "int", nullable: false),
                     familiarDesignado_id = table.Column<int>(type: "int", nullable: false),
                     enfermera_id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     nombres = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     apellidos = table.Column<string>(type: "VARCHAR(250)", maxLength: 250, nullable: false),
                     numeroTelefeno = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
@@ -143,7 +144,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pacientes", x => new { x.Id, x.historia_id });
+                    table.PrimaryKey("PK_Pacientes", x => x.historia_id);
                     table.ForeignKey(
                         name: "FK_Pacientes_Generos_genero_id",
                         column: x => x.genero_id,

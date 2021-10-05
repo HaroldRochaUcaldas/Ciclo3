@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20211005005431_Initial")]
-    partial class Initial
+    [Migration("20211005011349_tablaPersona")]
+    partial class tablaPersona
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -200,10 +200,12 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("historia_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("apellidos")
@@ -252,7 +254,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("VARCHAR(12)");
 
-                    b.HasKey("Id", "historia_id");
+                    b.HasKey("historia_id");
 
                     b.HasIndex("genero_id");
 

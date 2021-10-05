@@ -5,7 +5,7 @@ namespace HospiEnCasa.App.Persistencia
 {
     public class AppContext : DbContext
     {
-       // public DbSet<Persona> Personas { get; set; }
+//        public DbSet<Persona> Personas { get; set; }
         public DbSet<Genero> Generos { get; set; }
         public DbSet<SignoVital> SignoVitales { get; set; }
         public DbSet<TipoSigno> TipoSignos { get; set; }
@@ -29,13 +29,13 @@ namespace HospiEnCasa.App.Persistencia
 
        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          modelBuilder.Entity<Paciente>().HasKey(k => new { k.Id, k.enfermera_id });
-          modelBuilder.Entity<Paciente>().HasKey(k => new { k.Id, k.familiarDesignado_id });
-          modelBuilder.Entity<Paciente>().HasKey(k => new { k.Id, k.medico_id });
-          modelBuilder.Entity<Paciente>().HasKey(k => new { k.Id, k.historia_id });                              
-//          modelBuilder.Entity<Medico>().ToTable("Medicos");
-//          modelBuilder.Entity<Medico>().ToTable("Medicos");
-      //    modelBuilder.Entity<Medico>().Property(e => e.Id).ValueGeneratedNever();
+          modelBuilder.Entity<Paciente>().HasKey(k => new {k.enfermera_id });
+          modelBuilder.Entity<Paciente>().HasKey(k => new {k.familiarDesignado_id });
+          modelBuilder.Entity<Paciente>().HasKey(k => new { k.medico_id });
+          modelBuilder.Entity<Paciente>().HasKey(k => new { k.historia_id });                              
+         // modelBuilder.Entity<Persona>().ToTable("Persona");
+         // modelBuilder.Entity<Medico>().ToTable("Medicos");
+         // modelBuilder.Entity<Medico>().Property(e => e.Id).ValueGeneratedNever();
         }
 
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -198,10 +198,12 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("historia_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("apellidos")
@@ -250,7 +252,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("VARCHAR(12)");
 
-                    b.HasKey("Id", "historia_id");
+                    b.HasKey("historia_id");
 
                     b.HasIndex("genero_id");
 
