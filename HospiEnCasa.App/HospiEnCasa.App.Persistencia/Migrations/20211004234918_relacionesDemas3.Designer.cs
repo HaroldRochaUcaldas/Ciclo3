@@ -4,14 +4,16 @@ using HospiEnCasa.App.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20211004234918_relacionesDemas3")]
+    partial class relacionesDemas3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,6 +233,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasBaseType("HospiEnCasa.App.Dominio.Persona");
 
+                    b.Property<int>("Medico_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("ciudad")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -244,13 +249,22 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     b.Property<int?>("enfermeraId")
                         .HasColumnType("int");
 
+                    b.Property<int>("enfermera_id")
+                        .HasColumnType("int");
+
                     b.Property<int?>("familiarDesignadoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("familiarDesignado_id")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("fechaNacimiento")
                         .HasColumnType("DATETIME");
 
                     b.Property<int?>("historiaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("historia_id")
                         .HasColumnType("int");
 
                     b.Property<double>("latitud")
@@ -260,6 +274,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasColumnType("FLOAT");
 
                     b.Property<int?>("medicoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("signoVital_id")
                         .HasColumnType("int");
 
                     b.HasIndex("enfermeraId");

@@ -4,14 +4,16 @@ using HospiEnCasa.App.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20211004232506_relacionMedico")]
+    partial class relacionMedico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,6 +233,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 {
                     b.HasBaseType("HospiEnCasa.App.Dominio.Persona");
 
+                    b.Property<int>("Medico_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("ciudad")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -241,17 +246,8 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("VARCHAR(100)");
 
-                    b.Property<int?>("enfermeraId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("familiarDesignadoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("fechaNacimiento")
                         .HasColumnType("DATETIME");
-
-                    b.Property<int?>("historiaId")
-                        .HasColumnType("int");
 
                     b.Property<double>("latitud")
                         .HasColumnType("FLOAT");
@@ -261,12 +257,6 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
                     b.Property<int?>("medicoId")
                         .HasColumnType("int");
-
-                    b.HasIndex("enfermeraId");
-
-                    b.HasIndex("familiarDesignadoId");
-
-                    b.HasIndex("historiaId");
 
                     b.HasIndex("medicoId");
 
@@ -306,27 +296,9 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Enfermera", "enfermera")
-                        .WithMany()
-                        .HasForeignKey("enfermeraId");
-
-                    b.HasOne("HospiEnCasa.App.Dominio.FamiliarDesignado", "familiarDesignado")
-                        .WithMany()
-                        .HasForeignKey("familiarDesignadoId");
-
-                    b.HasOne("HospiEnCasa.App.Dominio.Historia", "historia")
-                        .WithMany()
-                        .HasForeignKey("historiaId");
-
                     b.HasOne("HospiEnCasa.App.Dominio.Medico", "medico")
                         .WithMany()
                         .HasForeignKey("medicoId");
-
-                    b.Navigation("enfermera");
-
-                    b.Navigation("familiarDesignado");
-
-                    b.Navigation("historia");
 
                     b.Navigation("medico");
                 });
