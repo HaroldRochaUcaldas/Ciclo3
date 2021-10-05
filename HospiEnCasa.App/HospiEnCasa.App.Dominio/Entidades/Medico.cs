@@ -22,6 +22,6 @@ namespace HospiEnCasa.App.Dominio
         [StringLength(500)]
         public string registro_rethus { get; set; }
         [ForeignKey("paciente_id")]
-        public Paciente paciente_ { get; set; }
+        public Paciente paciente { get; set; }
     }
 }

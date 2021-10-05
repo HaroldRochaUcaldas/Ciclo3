@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospiEnCasa.App.Persistencia.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20211001013539_Initial")]
+    [Migration("20211005015024_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -276,7 +276,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Historia", b =>
                 {
-                    b.HasOne("HospiEnCasa.App.Dominio.Paciente", "paciente_")
+                    b.HasOne("HospiEnCasa.App.Dominio.Paciente", "paciente")
                         .WithMany()
                         .HasForeignKey("paciente_id");
 
@@ -284,7 +284,7 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .WithMany()
                         .HasForeignKey("sugerenciacuidado_id");
 
-                    b.Navigation("paciente_");
+                    b.Navigation("paciente");
 
                     b.Navigation("sugerenciaCuidados_");
                 });
@@ -353,11 +353,11 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
-                    b.HasOne("HospiEnCasa.App.Dominio.Paciente", "paciente_")
+                    b.HasOne("HospiEnCasa.App.Dominio.Paciente", "paciente")
                         .WithMany()
                         .HasForeignKey("paciente_id");
 
-                    b.Navigation("paciente_");
+                    b.Navigation("paciente");
                 });
 
             modelBuilder.Entity("HospiEnCasa.App.Dominio.Paciente", b =>

@@ -21,7 +21,7 @@ namespace HospiEnCasa.App.Dominio
         public SugerenciaCuidado sugerenciaCuidados_ { get; set; }
 
         [ForeignKey("paciente_id")]
-        public Paciente paciente_ { get; set; }
+        public Paciente paciente { get; set; }
     }
 
 }
