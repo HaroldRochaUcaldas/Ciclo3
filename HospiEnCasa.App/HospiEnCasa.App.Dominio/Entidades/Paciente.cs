@@ -27,11 +27,17 @@ namespace HospiEnCasa.App.Dominio
         public int medico_id;
         public Medico medico { get; set; }
 
-        [ForeignKey("Enfermera")]
+        [ForeignKey("enfermera")]
+        public int enfermera_id { get; set; }
         public Enfermera enfermera { get; set; }
+        [ForeignKey("familiarDesignado")]
+        public int familiarDesignado_id { get; set; }
+        public FamiliarDesignado familiarDesignado { get; set; }
 
-        [ForeignKey("paciente_id")]
-        public Paciente paciente { get; set; }
-        
+        [ForeignKey("historia")]
+        public int historia_id { get; set; }
+        public Historia historia { get; set; }
+
+
     }
 }

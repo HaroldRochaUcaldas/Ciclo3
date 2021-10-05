@@ -16,8 +16,6 @@ namespace HospiEnCasa.App.Dominio
 
         [MaxLength(100)]
         public float valor { get; set; }
-        [ForeignKey("paciente_id")]
-        public Paciente paciente { get; set; }
     }
 
 }
