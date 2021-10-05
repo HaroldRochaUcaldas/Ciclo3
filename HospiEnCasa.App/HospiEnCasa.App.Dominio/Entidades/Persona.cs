@@ -23,7 +23,7 @@ namespace HospiEnCasa.App.Dominio
         [StringLength(12)]
         public String numeroTelefeno { get; set; }
         [ForeignKey("genero")]
-        public int genero_id;
+        public int genero_id { get; set; }
         public Genero genero { get; set; }
     }
 }

@@ -22,6 +22,16 @@ namespace HospiEnCasa.App.Dominio
         [Required]
         [Column(TypeName = "DATETIME")]
         public DateTime fechaNacimiento { get; set; }
+
+        [ForeignKey("medico")]
+        public int medico_id;
+        public Medico medico { get; set; }
+
+        [ForeignKey("Enfermera")]
+        public Enfermera enfermera { get; set; }
+
+        [ForeignKey("paciente_id")]
+        public Paciente paciente { get; set; }
         
     }
 }

@@ -80,11 +80,20 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                     latitud = table.Column<double>(type: "FLOAT", nullable: false),
                     longitud = table.Column<double>(type: "FLOAT", nullable: false),
                     ciudad = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
-                    fechaNacimiento = table.Column<DateTime>(type: "DATETIME", nullable: false)
+                    fechaNacimiento = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    medico_id = table.Column<int>(type: "int", nullable: false),
+                    Enfermera = table.Column<int>(type: "int", nullable: true),
+                    paciente_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pacientes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pacientes_Pacientes_paciente_id",
+                        column: x => x.paciente_id,
+                        principalTable: "Pacientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pacientes_Personas_Id",
                         column: x => x.Id,
@@ -251,6 +260,23 @@ namespace HospiEnCasa.App.Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Medicos_paciente_id",
                 table: "Medicos",
+                column: "paciente_id",
+                unique: true,
+                filter: "[paciente_id] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pacientes_Enfermera",
+                table: "Pacientes",
+                column: "Enfermera");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pacientes_medico_id",
+                table: "Pacientes",
+                column: "medico_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pacientes_paciente_id",
+                table: "Pacientes",
                 column: "paciente_id");
 
             migrationBuilder.CreateIndex(
@@ -267,12 +293,33 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 name: "IX_SignoVitales_signoId",
                 table: "SignoVitales",
                 column: "signoId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Pacientes_Enfermeras_Enfermera",
+                table: "Pacientes",
+                column: "Enfermera",
+                principalTable: "Enfermeras",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Pacientes_Medicos_medico_id",
+                table: "Pacientes",
+                column: "medico_id",
+                principalTable: "Medicos",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Enfermeras");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Enfermeras_Pacientes_paciente_id",
+                table: "Enfermeras");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Medicos_Pacientes_paciente_id",
+                table: "Medicos");
 
             migrationBuilder.DropTable(
                 name: "FamiliaresDesignados");
@@ -281,19 +328,22 @@ namespace HospiEnCasa.App.Persistencia.Migrations
                 name: "Historias");
 
             migrationBuilder.DropTable(
-                name: "Medicos");
-
-            migrationBuilder.DropTable(
                 name: "SignoVitales");
 
             migrationBuilder.DropTable(
                 name: "sugerenciaCuidados");
 
             migrationBuilder.DropTable(
+                name: "TipoSignos");
+
+            migrationBuilder.DropTable(
                 name: "Pacientes");
 
             migrationBuilder.DropTable(
-                name: "TipoSignos");
+                name: "Enfermeras");
+
+            migrationBuilder.DropTable(
+                name: "Medicos");
 
             migrationBuilder.DropTable(
                 name: "Personas");
