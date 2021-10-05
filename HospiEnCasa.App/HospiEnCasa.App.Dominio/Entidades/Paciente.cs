@@ -24,21 +24,21 @@ namespace HospiEnCasa.App.Dominio
         [Column(TypeName = "DATETIME")]
         public DateTime fechaNacimiento { get; set; }
 
-     /*    [ForeignKey("Medico")]
-        public int Medico_id { get; set; }*/
-        public Medico medico { get; set; }
+         [Key,ForeignKey("Medico")]
+        public int medico_id { get; set; }
+//        public Medico medico { get; set; }
 
-    /*    [ForeignKey("familiarDeignado")]
-        public int familiarDesignado_id { get; set; }*/
-        public FamiliarDesignado familiarDesignado { get; set; }
+        [Key,ForeignKey("FamiliarDesignado")]
+        public int familiarDesignado_id { get; set; }
+//        public FamiliarDesignado familiarDesignado { get; set; }
 
-   /*     [ForeignKey("enfermera")]
-        public int enfermera_id { get; set; }*/
-        public Enfermera enfermera { get; set; }
+        [Key,ForeignKey("Enfermera")]
+        public int enfermera_id { get; set; }
+//        public Enfermera enfermera { get; set; }
 
-    /*    [ForeignKey("Historia")]
-        public int historia_id { get; set; }*/
-        public Historia historia { get; set; }
+        [Key,ForeignKey("Historia")]
+        public int historia_id { get; set; }
+//        public Historia historia { get; set; }
 
         List<SignoVital> signoVitals { get; set; }
     }
